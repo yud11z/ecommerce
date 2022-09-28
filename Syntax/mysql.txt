@@ -1,0 +1,45 @@
+SELECT COUNT(pesanan.id_barang), barang.nama_barang
+FROM pesanan, barang
+WHERE pesanan.id_barang=barang.id
+GROUP BY barang.nama_barang
+
+SELECT COUNT(pesanan.id_barang), pelanggan.nama
+FROM pesanan, pelanggan
+WHERE pesanan.id_pelanggan=pelanggan.id
+GROUP BY pelanggan.nama
+
+SELECT pesanan.id_barang, pelanggan.nama, barang.nama_barang
+FROM ((pesanan
+INNER JOIN pelanggan ON pesanan.id_pelanggan=pelanggan.id) 
+INNER JOIN barang ON pesanan.id_barang=barang.id)
+
+(LEFT JOIN)
+SELECT pelanggan.id, pelanggan.nama, pesanan.id, pesanan.tgl_pesanan 
+FROM pelanggan 
+LEFT JOIN pesanan 
+ON pelanggan.id=pesanan.id_pelanggan
+
+SELECT penerbangan.id, penerbangan.tgl_penerbangan, penerbangan.sts_penerbangan, 
+pesawat.Nama_pesawat, pesawat.Kode_pesawat, pesawat.Nama_maskapai, 
+dari.Nama_bandara, tujuan.Nama_bandara
+FROM penerbangan, pesawat, bandara as dari, bandara as tujuan
+WHERE penerbangan.id_pesawat=pesawat.id AND 
+penerbangan.id_bandara_dari=dari.id AND 
+penerbangan.id_bandara_tujuan=tujuan.id
+
+SELECT penerbangan.id, penerbangan.tgl_penerbangan, penerbangan.sts_penerbangan, 
+pesawat.Nama_pesawat, pesawat.Kode_pesawat, pesawat.Nama_maskapai, 
+dari.Nama_bandara as bandara_dari, tujuan.Nama_bandara as bandara_tujuan
+FROM penerbangan, pesawat, bandara as dari, bandara as tujuan
+WHERE penerbangan.id_pesawat=pesawat.id AND 
+penerbangan.id_bandara_dari=dari.id AND 
+penerbangan.id_bandara_tujuan=tujuan.id
+
+SELECT costumer_penerbangan.*, costumer.Nama_costumer, costumer.Nomor_KTP, costumer.Alamat, costumer.Jenis_kelamin, costumer.Tgl_lahir
+FROM costumer, costumer_penerbangan
+WHERE costumer_penerbangan.id_penerbangan=1 AND 
+costumer_penerbangan.id=costumer.id
+
+SELECT costumer_penerbangan.*, costumer.Nama_costumer, costumer.Nomor_KTP, costumer.Alamat, costumer.Jenis_kelamin, costumer.Tgl_lahir
+FROM costumer, costumer_penerbangan
+WHERE costumer_penerbangan.id=costumer.id

@@ -1,0 +1,2 @@
+Route::get('/category/{category}', [CategoryController::class, 'edit']);
+php artisan route:list
